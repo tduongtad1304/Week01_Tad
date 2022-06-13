@@ -1,4 +1,4 @@
-import 'package:class_extends_factory_mixin_with/cubit/counter_cubit.dart';
+import 'package:class_extends_factory_mixin_with/class_extends_factory/cubit/counter_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
