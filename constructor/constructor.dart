@@ -65,3 +65,23 @@ class Dog extends Animal {
 class Cat extends Animal {
   Cat({name = 'Cat'}) : super();
 }
+
+//superclass và subclass kế thừa qua từ khó super
+//ta tạo ra một super class tên Speaker với thông số truyền vào constructor là name kiểu String
+//và với các lệnh print tương ứng ở dưới.
+class Speaker {
+  Speaker(String name) {
+    print('Speaker $name');
+    print('Speak louder please');
+  }
+}
+
+//ở đây ta tạo một class Teacher được gọi là subclass kế thừa superclass Speaker.
+//constructor cũng tương tự nhưng đi kèm với từ khoá super có tham số name truyền vào cho phép subclass này
+//còn có thể gọi là biến tham chiếu, dùng gọi được trực tiếp đến đội tượng của superclass gần nhất, ở đây là Speaker.
+class Teacher extends Speaker {
+  Teacher(String name) : super(name) {
+    print('Lecturer $name');
+    print('Lecturer is a part of Speaker');
+  }
+}

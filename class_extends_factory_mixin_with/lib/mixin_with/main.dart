@@ -46,8 +46,11 @@ void main(List<String> args) {
 // Also Breathing
 // Must not eating before running
 // We don't talk anymore
-// Feel thirsty due to talking to much
+// Running makes me thirsty
+// Meeting thirsty
+// Reproduction thirsty
+// Talking thirsty
 // Meeting friends when running
 // Running is happy
-//Copulate
-//Animal is able to reproduce
+// Copulate
+// Animal is able to reproduce

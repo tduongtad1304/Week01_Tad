@@ -32,6 +32,11 @@ void main(List<String> args) {
   print(dog.runtimeType);
 
   print(cat.runtimeType);
+
+  final teacher = new Teacher(
+      'Jason'); //tạo một đối tượng Lecturer kiểu final thể hiện qua Constructor Teacher với tham số đầu vào là name kiểu String.
+
+  print(teacher.runtimeType);
 }
 
 //Output:
@@ -42,3 +47,8 @@ void main(List<String> args) {
 // Tên Sinh viên 4: Thai Duong
 // Dog
 // Cat
+// Speaker Jason
+// Speak louder please
+// Lecturer Jason
+// Lecturer is a part of Speaker
+// Teacher

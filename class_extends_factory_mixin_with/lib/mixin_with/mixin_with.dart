@@ -3,6 +3,7 @@
 //Như trong bất kỳ ngôn ngữ OOP nào, một lớp trừu tượng không thể được khởi tạo trực tiếp.
 // Trong Dart, bạn chỉ có thể sử dụng từ khóa abstract trên các lớp vì các phương thức trừu tượng
 // chỉ đơn giản là không có phần thân. Ở đây tạo một lớp trừu tượng tên là ConsumeCalor.
+
 abstract class ConsumeCalor {
   const ConsumeCalor(); //constructor của abstract class
 
@@ -77,23 +78,43 @@ mixin Eating {
 }
 
 //phương thức meetings ta định nghĩa riêng cho mixin MeetingFriends, ở đây ta dùng on để giới hạn sử dụng cho mixin này chỉ trên một số loại nhất định, ở đây là Animal.
+//Ở đây chú ý ta override method sayThirsty() của class Animal với từ khoá super để gọi tới nó.
+//Ở đây ta print ra dòng 'Meeting thirsty' để phân biệt với các mixin, khác.
 mixin MeetingFriends on Animal {
   void meetings() => print('Meeting friends when running');
+  @override
+  void sayThirsty() {
+    super.sayThirsty();
+    print('Meeting thirsty');
+  }
 }
 //phương thức meetings ta định nghĩa riêng cho mixin Reproduction, ở đây ta dùng on để giới hạn sử dụng cho mixin này chỉ trên một số loại nhất định, ở đây là Animal.
+//tương tự như mixin trên nhưng print ra dòng 'Reproducing' để phân biệt với các mixin khác.
 mixin Reproduction on Animal {
   void copulate() => print('Copulate');
   void reproduce() => print('Animal is able to reproduce');
+
+  @override
+  void sayThirsty() {
+    super.sayThirsty();
+    print('Reproduction thirsty');
+  }
 }
 
 //phương thức meetings ta định nghĩa riêng cho mixin Talking,
 //ở đây ta dùng on để giới hạn sử dụng cho mixin này chỉ trên một số loại nhất định, ở đây là Animal.
 //ngoài ra, ta còn có thể override một trong các method sẵn có của lớp X ở đây là Animal, định nghĩa lại trong mixin này.
 //ví dụ sayThirsty().
+//tương tự như trên, ta override method sayThirsty() với từ khoá super. Thêm dòng print 'Talking thirsty'
+//để phân biệt với các mixin trên.
 mixin Talking on Animal {
   void talking() => print('Talk talk');
+
   @override
-  void sayThirsty() => print('Feel thirsty due to talking to much');
+  void sayThirsty() {
+    super.sayThirsty();
+    print('Talking thirsty');
+  }
 }
 
 //cuối cùng ta kết hợp cả extends và mixin như ở dưới.
@@ -103,8 +124,20 @@ mixin Talking on Animal {
 //giới hạn sử dụng trên class Animal nhưng vì class Human extends Animal nên ta có thể sử dụng mixin MeetingFriends cho class Human.
 //ta còn có thể override các phương thức có sẵn trong lớp extends Animal hoặc ngay cả trong các mixin
 //ở đây ta override method talking() trong mixin Talking.
+
+//Ngoài ra, khi sử dụng mixin, ta chú ý đến thứ tự các mixin ta dùng sau with, theo nguyên tắc kế thừa phân cấp.
+//thì Mỗi mixin tạo ra một lớp hoặc interface mới trong runtime được kế thừa bởi lớp tiếp theo trong hệ thống phân cấp.
+//Nguyên tắc then chốt là: hệ thống phân cấp kế thừa luôn đọc từ phải sang trái trong định nghĩa của một lớp.
+
+//Như vậy theo thứ tự, các đối tượng tạo ra từ class Human kế thừa Animal sẽ gọi các phương thức trong mixin Talking trước
+//rồi theo thứ tự tiếp theo là Reproduction và MeetingFriends.
+//Vì nó call super() tiếp theo nên phương thức trong mixin Reproduction sẽ được gọi tiếp trước khi lệnh print của mixin Talking thực hiện.
+//và cứ như thế, theo thứ tự in ra, thì lệnh print trong method sayThirsty() của MeetingFriends sẽ in a trước, tiếp theo là Reproduction và Talking và cuối cùng là class Bird.
+
 class Human extends Animal
     with Breathing, Eating, MeetingFriends, Reproduction, Talking {
   @override
   void talking() => print('We don\'t talk anymore');
+  // @override
+  // void sayThirsty() => print('Feel thirsty due to talking to much');
 }
