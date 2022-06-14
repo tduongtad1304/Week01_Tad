@@ -22,14 +22,20 @@ void main(List<String> args) {
     ..calorConsume(3000)
     ..breathing() //mixin Breathing
     ..eating() //mixin Eating
-    ..sayThirsty() //extends Animal
+    ..talking() //mixin Talking and override it.
+    ..sayThirsty() //extends Animal while mixin Talking on Animal => override sayThirsty() in this mixin
     ..meetings() //extends Animal mixin từ MeetingFriends on Animal
     ..sayHappy(); //extends Animal
+
+  //mixin Reproduction
+  human
+    ..copulate()
+    ..reproduce();
 }
 
 //Output: 
 
-//Animal:
+// Animal:
 // calor consume: 1200
 // Running makes me thirsty
 // Running is happy
@@ -39,6 +45,9 @@ void main(List<String> args) {
 // calor consume: 3000
 // Also Breathing
 // Must not eating before running
-// Running makes me thirsty
+// We don't talk anymore
+// Feel thirsty due to talking to much
 // Meeting friends when running
 // Running is happy
+//Copulate
+//Animal is able to reproduce

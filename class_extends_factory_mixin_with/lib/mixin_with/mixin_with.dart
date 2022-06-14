@@ -80,10 +80,31 @@ mixin Eating {
 mixin MeetingFriends on Animal {
   void meetings() => print('Meeting friends when running');
 }
+//phương thức meetings ta định nghĩa riêng cho mixin Reproduction, ở đây ta dùng on để giới hạn sử dụng cho mixin này chỉ trên một số loại nhất định, ở đây là Animal.
+mixin Reproduction on Animal {
+  void copulate() => print('Copulate');
+  void reproduce() => print('Animal is able to reproduce');
+}
+
+//phương thức meetings ta định nghĩa riêng cho mixin Talking,
+//ở đây ta dùng on để giới hạn sử dụng cho mixin này chỉ trên một số loại nhất định, ở đây là Animal.
+//ngoài ra, ta còn có thể override một trong các method sẵn có của lớp X ở đây là Animal, định nghĩa lại trong mixin này.
+//ví dụ sayThirsty().
+mixin Talking on Animal {
+  void talking() => print('Talk talk');
+  @override
+  void sayThirsty() => print('Feel thirsty due to talking to much');
+}
 
 //cuối cùng ta kết hợp cả extends và mixin như ở dưới.
 //class Human sẽ kế thừa lớp Animal nhưng không bắt buộc phải ghi đè hết tất cả các phương thức trong Animal
 //như việc Animal phải ghi đè các phương thức của interfaces ConsumeCalor.
 //ta có thể sử dụng with một hoặc nhiều mixin cho class Human để sử dụng các phương thức của các mixin đó, ngoài ra, ta thấy mixin MeetingFriends chỉ được.
 //giới hạn sử dụng trên class Animal nhưng vì class Human extends Animal nên ta có thể sử dụng mixin MeetingFriends cho class Human.
-class Human extends Animal with Breathing, Eating, MeetingFriends {}
+//ta còn có thể override các phương thức có sẵn trong lớp extends Animal hoặc ngay cả trong các mixin
+//ở đây ta override method talking() trong mixin Talking.
+class Human extends Animal
+    with Breathing, Eating, MeetingFriends, Reproduction, Talking {
+  @override
+  void talking() => print('We don\'t talk anymore');
+}
